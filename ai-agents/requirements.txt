@@ -10,6 +10,9 @@ eth-account==0.13.4
 # AI & NLP
 openai==1.59.5
 
+# SingularityNET MeTTa (install from source)
+# hyperon  # Install with: pip install git+https://github.com/singularitynet-ai/hyperon-python.git
+
 # Data Processing
 requests==2.32.3
 python-dotenv==1.0.1

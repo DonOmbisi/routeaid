@@ -1,0 +1,46 @@
+services:
+  # Frontend Next.js Application
+  - type: web
+    name: aidroute-frontend
+    env: node
+    plan: free
+    buildCommand: npm run build
+    startCommand: npm start
+    buildFilter:
+      paths:
+        - "!ai-agents/**"
+        - "!contracts/**"
+        - "!scripts/**"
+        - "!test/**"
+        - "!hardhat.config.*"
+        - "!ignition/**"
+    envVars:
+      - key: NODE_VERSION
+        value: 18
+      - key: NEXT_PUBLIC_CONTRACT_ADDRESS
+        sync: false
+      - key: NEXT_PUBLIC_PYUSD_ADDRESS
+        value: 0x6c3ea9036406852006290770BEdFcAbA0e23A0e8
+      - key: NEXT_PUBLIC_AI_AGENT_URL
+        value: https://aidroute-backend.onrender.com
+      - key: SEPOLIA_RPC_URL
+        sync: false
+
+  # Backend Python AI Service
+  - type: web
+    name: aidroute-backend
+    env: docker
+    plan: free
+    dockerfilePath: ./ai-agents/Dockerfile
+    dockerContext: ./ai-agents
+    envVars:
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: SEPOLIA_RPC_URL
+        sync: false
+      - key: SEPOLIA_PRIVATE_KEY
+        sync: false
+
+databases:
+  # No database needed for this deployment
+  # Blockchain serves as the data layer
