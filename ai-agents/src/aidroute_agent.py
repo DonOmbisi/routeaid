@@ -479,4 +479,56 @@ What would you like to do?"""
             self.agent.run()
         else:
             self.logger.error("Agent not initialized - uAgents not available")
+            # Start Flask API server instead
+            self.start_flask_server()
+    
+    def start_flask_server(self):
+        """Start Flask API server as fallback"""
+        try:
+            from flask import Flask, jsonify, request
+            from flask_cors import CORS
+            
+            app = Flask(__name__)
+            CORS(app)
+            
+            @app.route('/health', methods=['GET'])
+            def health_check():
+                return jsonify({"status": "healthy", "message": "AidRoute AI Service"})
+            
+            @app.route('/analyze-disasters', methods=['POST'])
+            def analyze_disasters():
+                # Simple fallback analysis
+                return jsonify({
+                    "analysis": "Basic disaster analysis (uAgents unavailable)",
+                    "critical_events": [],
+                    "recommendations": ["Deploy uAgents for full functionality"]
+                })
+            
+            @app.route('/plan-mission', methods=['POST'])
+            def plan_mission():
+                # Simple fallback mission planning
+                return jsonify({
+                    "mission_plan": "Basic mission planning (uAgents unavailable)",
+                    "priority": "medium",
+                    "estimated_resources": "TBD"
+                })
+            
+            self.logger.info("Starting Flask API server on port 5000")
+            app.run(host='0.0.0.0', port=5000)
+            
+        except ImportError:
+            self.logger.error("Flask not available - cannot start API server")
+            return
+
+
+if __name__ == "__main__":
+    # Set up logging
+    logging.basicConfig(
+        level=logging.INFO,
+        format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+    )
+    
+    # Create and run the coordinator
+    coordinator = AidRouteCoordinator()
+    coordinator.run()
 
