@@ -4,7 +4,7 @@ services:
     name: aidroute-frontend
     env: node
     plan: free
-    buildCommand: npm run build
+    buildCommand: npm install && npm run build
     startCommand: npm start
     buildFilter:
       paths:
@@ -21,7 +21,7 @@ services:
         - ".next/**"
     envVars:
       - key: NODE_VERSION
-        value: 18
+        value: 20
       - key: NEXT_PUBLIC_CONTRACT_ADDRESS
         sync: false
       - key: NEXT_PUBLIC_PYUSD_ADDRESS
