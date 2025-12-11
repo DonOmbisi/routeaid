@@ -713,12 +713,3 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - **Next.js Team**: For the amazing React framework
 
 ---
-
-<div align="center">
-  <p>Built with ❤️ for humanity by the AidRoute team</p>
-  <p>Powered by the Artificial Superintelligence Alliance</p>
-  
-  <img src="public/logo.png" alt="AidRoute" width="80"/>
-  
-  **Coordinating Aid. Autonomously.**
-</div>
