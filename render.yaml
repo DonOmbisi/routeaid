@@ -8,12 +8,17 @@ services:
     startCommand: npm start
     buildFilter:
       paths:
-        - "!ai-agents/**"
-        - "!contracts/**"
-        - "!scripts/**"
-        - "!test/**"
-        - "!hardhat.config.*"
-        - "!ignition/**"
+        - "app/**"
+        - "components/**"
+        - "lib/**"
+        - "public/**"
+        - "package.json"
+        - "package-lock.json"
+        - "next.config.ts"
+        - "tsconfig.json"
+        - "tailwind.config.js"
+        - "postcss.config.mjs"
+        - ".next/**"
     envVars:
       - key: NODE_VERSION
         value: 18
